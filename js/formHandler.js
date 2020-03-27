@@ -39,6 +39,9 @@
         data[item.name] = item.value;
         console.log(`${item.name} is ${item.value}`);
       })
+      if(data.size === 'CoffeeZilla'){
+        $('#achivement').modal('show');
+      }
       fn(data);
       this.reset();
       this.elements[0].focus();
