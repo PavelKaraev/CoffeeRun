@@ -49,7 +49,7 @@
   }
   FormHandler.prototype.addRangeChangeHandler = function(){
     let rangeValue = this.$rangeValue;
-    this.$range.on('input', function(){
+    this.$range.on('input change', function(){
       let value = +$(this).val();
       rangeValue.text(`${value}%`);
       if(value < 40){
