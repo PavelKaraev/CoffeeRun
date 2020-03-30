@@ -6,6 +6,7 @@
   let Truck = App.Truck;
   let DataStore = App.DataStore;
   let FormHandler = App.FormHandler;
+  let Validation = App.Validation;
   let CheckList = App.CheckList;
 
   let myTruck = new Truck('barista', new DataStore());
@@ -18,6 +19,7 @@
     myTruck.createOrder.call(myTruck, data);
     checkList.addRow.call(checkList, data);
   });
+  formHandler.addInputHandler(Validation.isCompanyEmail);
+  formHandler.addDecafStrengthHandndler(Validation.decaf);
   formHandler.addRangeChangeHandler();
-  console.log(formHandler);
 })(window);

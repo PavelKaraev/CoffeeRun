@@ -47,9 +47,47 @@
       this.elements[0].focus();
     })
   }
+
+  FormHandler.prototype.addInputHandler = function(fn){
+    console.log('Setting input handler for form');
+    this.$formElement.on('input', '[name="emailAddress"]', function(event){
+      let email = event.target.value;
+      let message = '';
+      if(fn(email)){
+        event.target.setCustomValidity();
+      }else{
+        message = `${email} is not authorized email address`;
+        event.target.setCustomValidity(message);
+      }
+    })
+  }
+
+  FormHandler.prototype.addDecafStrengthHandndler = function(fn){
+    console.log('Setting Decaf strength handler for form');
+    this.$formElement.on('input', '[name="coffee"], [name="strength"]', function(event){
+      let coffee = $('[name="coffee"]').val();
+      let strength = $('[name="strength"]').val();
+      let message = '';
+      if(fn(coffee, strength)){
+        message = `${coffee} is not decaf with ${strength}% strength`;
+        event.target.setCustomValidity(message);
+      }
+    })
+  }
+
   FormHandler.prototype.addRangeChangeHandler = function(){
     let rangeValue = this.$rangeValue;
-    this.$range.on('input change', function(){
+    this.$range.on('input', function(){
+      let value = +$(this).val();
+      rangeValue.text(`${value}%`);
+      if(value < 40){
+        rangeValue.css('color', 'green');
+      }else if(value < 70 && value >= 40){
+        rangeValue.css('color', 'orange');
+      }else if(value >= 70){
+        rangeValue.css('color', 'red');
+      }
+    }).on('change', function(){
       let value = +$(this).val();
       rangeValue.text(`${value}%`);
       if(value < 40){

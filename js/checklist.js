@@ -95,7 +95,6 @@
     let timerID;
 
     this.$element.on('click', 'input', function(event){
-      //
       if(!timerID){
         this.$element.find(`[value="${event.target.value}"]`).closest('[data-coffee-order="checkbox"]').css('box-shadow', '100px 100px 20px rgba(0,0,0,0.4) inset');
         timerID = setTimeout(() => {
@@ -106,6 +105,7 @@
       }
     }.bind(this)).on('dblclick', function(){
       clearTimeout(timerID);
+      this.$element.find(`[value="${event.target.value}"]`).closest('[data-coffee-order="checkbox"]').css('box-shadow', 'none');
       let element = event.target;
       this.getRow(element);
     }.bind(this));
