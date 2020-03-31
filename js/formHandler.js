@@ -42,9 +42,8 @@
       if(data.size === 'CoffeeZilla'){
         $('#achivement').modal('show');
       }
-      fn(data);
-      this.reset();
-      this.elements[0].focus();
+      fn(data)
+      .then(() => this.reset(), this.elements[0].focus());
     })
   }
 
@@ -54,7 +53,7 @@
       let email = event.target.value;
       let message = '';
       if(fn(email)){
-        event.target.setCustomValidity();
+        event.target.setCustomValidity('');
       }else{
         message = `${email} is not authorized email address`;
         event.target.setCustomValidity(message);
@@ -71,6 +70,8 @@
       if(fn(coffee, strength)){
         message = `${coffee} is not decaf with ${strength}% strength`;
         event.target.setCustomValidity(message);
+      }else{
+        event.target.setCustomValidity('');
       }
     })
   }

@@ -99,8 +99,8 @@
         this.$element.find(`[value="${event.target.value}"]`).closest('[data-coffee-order="checkbox"]').css('box-shadow', '100px 100px 20px rgba(0,0,0,0.4) inset');
         timerID = setTimeout(() => {
           let email = event.target.value;
-          this.removeRow(email);
-          fn(email);
+          fn(email)
+          .then(() => this.removeRow(email));
         }, 1000);
       }
     }.bind(this)).on('dblclick', function(){
